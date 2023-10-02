@@ -13,7 +13,7 @@ class MazeBuilder {
         this.maze = this.initArray();
 
         this.maze.forEach((row, r) => {
-            row.forEach((cell, c) => {
+            row.forEach((_, c) => {
                 switch (r) {
                     case 0:
                     case this.rows - 1:
