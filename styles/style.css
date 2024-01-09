@@ -18,9 +18,9 @@ body {
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     background-size: 300% 300%;
-    /*background-image: linear-gradient(-45deg, #004369 0%, #01949A 25%, #004369 51%, #01949A 100%);*/
-    /*animation: AnimateBG 20s ease infinite;*/
-    background-color: #004369;
+    background-image: linear-gradient(-45deg, #004369 0%, #01949A 25%, #004369 51%, #01949A 100%);
+    animation: AnimateBG 20s ease infinite;
+    /*background-color: #004369;*/
     height: 100dvh;
     display: flex;
     justify-content: space-between;
@@ -43,6 +43,7 @@ body {
 }
 #graph-slide {
     display: flex;
+    justify-content: center;
 }
 #setup-slide,
 #maze-slide {
