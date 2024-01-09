@@ -55,7 +55,7 @@ class MazeBuilder {
      * @returns {any[][]}
      */
     initArray() {
-        return new Array(this.rows).fill().map(() => new Array(this.cols).fill(0));
+        return new Array(this.rows).fill(0).map(() => new Array(this.cols).fill(0));
     }
 
     /**

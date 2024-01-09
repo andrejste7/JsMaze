@@ -1,5 +1,7 @@
-class Bfs {
-    constructor(springy) {
+class Bfs extends AlgorithmBase {
+    constructor() {
+        super();
+
         // array that holds result of BFS
         this.result = [];
 
@@ -7,7 +9,7 @@ class Bfs {
         this.queue = new Queue();
 
         // Springy.js
-        this.springy = springy;
+        this.springy = null;
 
         // Algorithm starting node
         this.selectedNode = null;
@@ -38,17 +40,9 @@ class Bfs {
         return nodes;
     }
 
-    visualizeTraversing() {
-        for (let i = 0; i < this.result.length; i++) {
-            setTimeout(() => {
-                this.result[i].data.highlight = true;
-                const element = $('#cnv-result');
-                element.text(element.text() + ' ' + this.result[i].data.label);
-            }, i * 100);
-        }
-    }
+    traverse(springy) {
+        this.springy = springy;
 
-    traverse() {
         this.selectedNode = this.springy.graph.nodes.find((n) => n.id === 'start');
 
         if (this.selectedNode !== null) {
@@ -65,7 +59,7 @@ class Bfs {
             }
 
             this.recursiveTraverse();
-            // this.visualizeTraversing()
+
             return this.result;
         }
     }
@@ -77,8 +71,6 @@ class Bfs {
             this.result.push(nodeToSearch);
             if (nodeToSearch.id === 'end') return;
         } else return;
-
-        // if (this.result.length >= this.springy.graph.nodes.length) return
 
         let nodes = this.getNextNodes(nodeToSearch);
         if (nodes.length > 0) {

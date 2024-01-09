@@ -1,11 +1,181 @@
-#maze_container {
+/* BASE */
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+:root {
+    --primary: #ffffff;
+    --secondary: #ffffff;
+    --stepNumber: 6;
+    --containerWidth: 600px;
+    --bgColor: #ffffff;
+    --inputBorderColor: lightgray;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    background-size: 300% 300%;
+    /*background-image: linear-gradient(-45deg, #004369 0%, #01949A 25%, #004369 51%, #01949A 100%);*/
+    /*animation: AnimateBG 20s ease infinite;*/
+    background-color: #004369;
+    height: 100dvh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    user-select:none;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+/* SLIDES */
+.slide {
+    height: 100%;
+    width: 100dvw;
+    transition-duration: .4s;
+}
+#graph-slide {
+    display: flex;
+}
+#setup-slide,
+#maze-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* MENU */
+#maze_menu {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#maze_menu a {
+    color: #ffffff;
+    font-size: 28px;
+    text-decoration: unset;
+    font-weight: 700;
+}
+#maze_menu a.active,
+#maze_menu a:hover {
+    text-decoration: underline;
+    color: #DB1F48;
+}
+#maze_menu > div {
+    display: flex;
+    gap: 35px;
+    margin-top: 18px;
+}
+
+/* SETUP */
+#settings * {
+    user-select: none;
+}
+#settings {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Noto Sans', sans-serif;
+}
+#settings label {
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: #ffffff;
+}
+#inputs {
+    font-size: 50px;
+    font-weight: 800;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+#size {
+    font-size: 48px;
+    height: 70px;
+    width: 90px;
+    padding: 0 10px 0 10px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    caret-color: transparent;
+}
+#size::selection {
+    background-color:transparent;
+}
+#size-repeater {
+    min-width: 57px;
+    text-align: center;
+}
+.button {
+    background-color: transparent;
+    border: solid 3px #FFFFFF;
+    color: #FFFFFF;
+    padding: 10px 70px;
+    font-size: 35px;
+    font-family: "Raleway", sans-serif;
     position: relative;
-    margin: 1em auto;
-    width: fit-content;
+    transition: all 300ms ease-in;
+}
+
+.button:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.button:before {
+    content: "";
+    position: absolute;
+    background-color: white;
+    bottom: -1px;
+    left: -2px;
+    right: 100%;
+    top: 0;
+    z-index: -1;
+    transition: right 300ms ease-in;
+}
+
+.button:hover:before {
+    right: 0;
+}
+
+/* MAZE PREVIEW */
+#maze-preview-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* GRAPH */
+#graph_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* MAZE */
+#maze-slide {
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+#maze_content {
+    flex: 12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #maze {
     position: relative;
-    background-color: #a7c53f;
     background-size: 8em 8em;
 }
 #maze div {
@@ -13,8 +183,8 @@
 }
 #maze div div {
     position: relative;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
 }
 #maze div div::after {
     position: absolute;
@@ -53,14 +223,18 @@
     content: '';
     width: 10px;
     height: 10px;
-    background-color: #e54242;
+    background-color: #ffffff;
     border-radius: 50%;
     position: absolute;
     left: calc(50% - 5px);
     top: calc(50% - 5px);
 }
+#maze div div.entrance:after,
+#maze div div.exit:after {
+    background-color: #DB1F48;
+}
 #maze div div.wall, #maze div div.nubbin.wall, #maze div div.door.exit {
-    background-color: #454545;
+    background-color: #ffffff;
     background-size: 0.5em 0.5em;
 }
 #maze div div.nubbin.wall::after {
@@ -80,10 +254,10 @@
 }
 
 #maze div div:nth-child(odd) {
-    width: 1em;
+    width: .125em;
 }
 #maze div:nth-child(odd) div {
-    height: 1em;
+    height: .125em;
 }
 
 #maze.finished::after {
@@ -129,4 +303,126 @@
 #maze_message {
     flex: 3;
     text-align: right;
+}
+
+/* REPEAT */
+#repeat-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#repeat-slide > div > div:last-of-type {
+    display: flex;
+    justify-content: center;
+}
+#repeat-slide > div {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+#results {
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+@keyframes AnimateBG {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
+
+/* PROGRESS */
+#progression {
+    flex: 1;
+}
+#progression .progress-bar {
+    display: flex;
+    margin-bottom: 40px;
+    user-select: none;
+}
+#progression .progress-bar .step {
+    width: 100px;
+    text-align: center;
+    position: relative;
+}
+#progression .progress-bar .step p {
+    font-weight: 500;
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+.progress-bar .step .bullet {
+    height: 25px;
+    width: 25px;
+    border: 2px solid #ffffff;
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+    transition: 0.2s;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 25px;
+}
+.progress-bar .step .bullet span {
+    color: #ffffff;
+}
+.progress-bar .step .bullet.active {
+    border-color: #DB1F48;
+    background: #DB1F48;
+}
+.progress-bar .step .bullet span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.progress-bar .step .bullet.active span {
+    display: none;
+}
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after {
+    position: absolute;
+    content: "";
+    bottom: 11px;
+    right: -51px;
+    height: 3px;
+    width: 44px;
+    background: #ffffff;
+}
+.progress-bar .step .bullet.active:after {
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: animate 0.3s linear forwards;
+}
+@keyframes animate {
+    100% {
+        transform: scaleX(1);
+    }
+}
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after {
+    display: none;
+}
+.progress-bar .step p.active {
+    color: #ffffff;
+    transition: 0.2s linear;
+}
+.progress-bar .step .check {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    font-size: 15px;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.progress-bar .step .check.active {
+    display: block;
+    color: #fff;
 }

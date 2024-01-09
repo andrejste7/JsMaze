@@ -5,12 +5,6 @@ class Queue {
         this.queue = {};
     }
 
-    clear() {
-        this.firstIndex = 1;
-        this.lastIndex = 1;
-        this.queue = {};
-    }
-
     enqueue(data) {
         this.queue[this.lastIndex] = data;
         this.lastIndex++;

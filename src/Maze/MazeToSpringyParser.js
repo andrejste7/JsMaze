@@ -49,7 +49,7 @@ class MazeToSpringyParser {
                     fromNodeName,
                     toNodeName,
                     {
-                        color: '#00A0B0',
+                        color: '#f5d66f',
                         directional: true,
                     },
                 ]);

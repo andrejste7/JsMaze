@@ -1,3 +1,0 @@
-class Dijkstra {
-    constructor() {}
-}

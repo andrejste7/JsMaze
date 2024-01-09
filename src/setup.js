@@ -1,27 +1,29 @@
 /**
- * Maze fields should be represented as a
- * square matrix in order to work
- * @type {number}
+ * Start with the placeholder for
+ * maze object, so it can be used throughout
+ * the script
+ * @type {?Maze}
  */
-const MAZE_SIZE = 10;
+let maze = null;
 
 /**
- * Instance of a class that provides
- * methods to create maze instances.
- * @type {MazeBuilder}
+ * Allows to substitute slide
+ * strategies for swapping with new
+ * strategies
+ * @type {SlideStrategyFactory}
  */
-const mazeInstance = new MazeBuilder(MAZE_SIZE, MAZE_SIZE);
+const strategyFactory = new SlideStrategyFactory();
 
 /**
- *
- * @type {MazeNodeMaskBuilder}
+ * Allows to recreate whole rendering
+ * process for every menu item activation
+ * @type {MenuItemFactory}
  */
-const mazeNodeMask = new MazeNodeMaskBuilder();
+const menuItemFactory = new MenuItemFactory();
 
 /**
- * Instance of a class that provides
- * methods to parse array of nodes
- * into a Springy.js graph
- * @type {MazeToSpringyParser}
+ * Creating main menu used
+ * along the whole project
+ * @type {Menu}
  */
-const mazeToSpringyParser = new MazeToSpringyParser(MAZE_SIZE);
+const MENU = new Menu();
