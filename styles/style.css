@@ -38,6 +38,7 @@ body {
 .slide {
     height: 100%;
     width: 100dvw;
+    opacity: 0;
     transition-duration: .4s;
 }
 #graph-slide {
