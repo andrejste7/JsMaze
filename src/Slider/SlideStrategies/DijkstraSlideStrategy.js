@@ -24,8 +24,9 @@ class DijkstraSlideStrategy extends SlideStrategy {
                         (UiSettingsSlide) => {
                             // On the very first slide we are
                             // creating a new Maze instance
-                            // with specific sizes
+                            // with specific sizes and algorithm
                             maze = new Maze(UiSettingsSlide.mazeSettings.mazeSize);
+                            maze.setAlgorithm(new Dijkstra());
                             this.slider.nextSlide();
                         },
                         () => {

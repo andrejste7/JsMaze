@@ -60,8 +60,6 @@ class Maze {
     constructor(mazeSize, showDots = false) {
         this.mazeSize = mazeSize;
 
-        this.initialize();
-
         if (showDots) {
             this.mask.forEach(e => this.mazeInstance.maze[e.position.y][e.position.x] = 8);
         }
@@ -71,12 +69,12 @@ class Maze {
         this.mazeInstance = new MazeBuilder(this.mazeSize, this.mazeSize);
         this.mazeNodeMask = new MazeNodeMaskBuilder();
         this.mazeToSpringyParser = new MazeToSpringyParser(this.mazeSize);
-        this.mazeSolvingAlgorithm = new Bfs();
         this.mask = this.mazeNodeMask.getMaskLayerFromMaze(this.mazeInstance.maze);
     }
 
     setAlgorithm(algorithm) {
         this.mazeSolvingAlgorithm = algorithm;
+        this.initialize();
     }
 
     setSpringy(springy) {

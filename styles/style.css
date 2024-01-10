@@ -18,9 +18,9 @@ body {
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
     background-size: 300% 300%;
-    background-image: linear-gradient(-45deg, #004369 0%, #01949A 25%, #004369 51%, #01949A 100%);
-    animation: AnimateBG 20s ease infinite;
-    /*background-color: #004369;*/
+    /*background-image: linear-gradient(-45deg, #004369 0%, #01949A 25%, #004369 51%, #01949A 100%);*/
+    /*animation: AnimateBG 20s ease infinite;*/
+    background-color: #004369;
     height: 100dvh;
     display: flex;
     justify-content: space-between;
@@ -188,6 +188,113 @@ body {
     width: 2em;
     height: 2em;
 }
+
+#maze div div span.top {
+    content: '';
+    width: 3.2px;
+    height: 30px;
+    background: rgb(213,31,71);
+    background: linear-gradient(0deg, rgba(213,31,71,1) 0%, rgba(213,31,71,0.2) 60%, rgba(213,31,71,0.1) 100%);
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 35px);
+    z-index: 1;
+}
+#maze div div span.left {
+    content: '';
+    width: 30px;
+    height: 3.2px;
+    background: rgb(213,31,71);
+    background: linear-gradient(270deg, rgba(213,31,71,1) 0%, rgba(213,31,71,0.2) 60%, rgba(213,31,71,0.1) 100%);
+    position: absolute;
+    left: calc(50% - 33px);
+    top: calc(50% - 1.6px);
+    z-index: 1;
+}
+#maze div div span.bottom {
+    content: '';
+    width: 3.2px;
+    height: 33px;
+    background: rgb(213,31,71);
+    background: linear-gradient(180deg, rgba(213,31,71,1) 0%, rgba(213,31,71,0.2) 60%, rgba(213,31,71,0.1) 100%);
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 0px);
+    z-index: 1;
+}
+#maze div div span.right {
+    content: '';
+    width: 30px;
+    height: 3.2px;
+    background: rgb(213,31,71);
+    background: linear-gradient(90deg, rgba(213,31,71,1) 0%, rgba(213,31,71,0.2) 60%, rgba(213,31,71,0.1) 100%);
+    position: absolute;
+    left: calc(50% - 0px);
+    top: calc(50% - 1.6px);
+    z-index: 1;
+}
+
+#maze div div span.result.top {
+    content: '';
+    width: 3.2px;
+    height: 30px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 35px);
+    z-index: 2;
+}
+#maze div div span.result.left {
+    content: '';
+    width: 30px;
+    height: 3.2px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 33px);
+    top: calc(50% - 1.6px);
+    z-index: 2;
+}
+#maze div div span.result.bottom {
+    content: '';
+    width: 3.2px;
+    height: 33px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 0px);
+    z-index: 2;
+}
+#maze div div span.result.right {
+    content: '';
+    width: 30px;
+    height: 3.2px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 0px);
+    top: calc(50% - 1.6px);
+    z-index: 2;
+}
+#maze div div.entrance span.entrance.bottom {
+    content: '';
+    width: 3.2px;
+    height: 15px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 0px);
+    z-index: 2;
+}
+#maze div div.exit span.exit.top {
+    content: '';
+    width: 3.2px;
+    height: 15px;
+    background: #5dff54;
+    position: absolute;
+    left: calc(50% - 1.6px);
+    top: calc(50% - 16px);
+    z-index: 2;
+}
+
 #maze div div::after {
     position: absolute;
     left: -3px;
@@ -225,11 +332,14 @@ body {
     content: '';
     width: 10px;
     height: 10px;
-    background-color: #ffffff;
+    background-color: #DB1F48;
     border-radius: 50%;
     position: absolute;
     left: calc(50% - 5px);
     top: calc(50% - 5px);
+}
+#maze div div.path.result:after {
+    background-color: #5dff54;
 }
 #maze div div.entrance:after,
 #maze div div.exit:after {

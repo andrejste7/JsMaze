@@ -24,8 +24,9 @@ class BfsSlideStrategy extends SlideStrategy {
                         (UiSettingsSlide) => {
                             // On the very first slide we are
                             // creating a new Maze instance
-                            // with specific sizes
+                            // with specific sizes and algorithm
                             maze = new Maze(UiSettingsSlide.mazeSettings.mazeSize);
+                            maze.setAlgorithm(new Bfs());
                             this.slider.nextSlide();
                         },
                         () => {
@@ -85,6 +86,9 @@ class BfsSlideStrategy extends SlideStrategy {
                                 graph: maze.mazeToSpringyParser.arrayToSpringy(maze.mask),
                                 nodeSelected: function(node) {},
                             });
+                            window.addEventListener('resize', () => {
+                                document.getElementById("cnv-graph").width = innerWidth;
+                            })
 
                             // Actually simulating the maze
                             // traversing to get the result
@@ -104,7 +108,7 @@ class BfsSlideStrategy extends SlideStrategy {
                                         // to use in the next steps
                                         maze.setSpringy(springy);
                                         maze.setResult(result);
-                                    }, i * 105);
+                                    }, i * 101);
                                 }
                             }
                         },
@@ -140,11 +144,88 @@ class BfsSlideStrategy extends SlideStrategy {
                                     for (let i = 0; i < result.length; i++) {
                                         setTimeout(() => {
                                             $(`#maze_container div[data-id="${result[i].id}"]`).addClass('path');
+
+                                            result[i].data.node.neighbours.forEach((n) => {
+                                                let id = result[i].id;
+                                                let baseX =  Math.abs(n.position.y - result[i].data.node.position.y) / 2;
+                                                let baseY = Math.abs(n.position.x - result[i].data.node.position.x) / 2;
+                                                if (baseX <= 0) baseX = 1;
+                                                if (baseY <= 0) baseY = 1;
+                                                let element = $(`#maze_container div[data-id="${id}"]`);
+
+                                                let dir = n.direction;
+
+                                                if (dir === "top") {
+                                                    element
+                                                        .append(`<span style='height: ${baseX * 33}px; top: calc(50% - ${baseX * 35}px);' class="${n.direction}">`);
+                                                } else if (dir === "bottom") {
+                                                    element
+                                                        .append(`<span style='height: ${baseX * 33}px;' class='${n.direction}'>`);
+                                                } else if (dir === "left") {
+                                                    element
+                                                        .append(`<span style='width: ${baseY * 33}px; left: calc(50% - ${baseY * 33}px);' class='${n.direction}'>`);
+                                                } else {
+                                                    element
+                                                        .append(`<span style='width: ${baseY * 33}px;' class='${n.direction}'>`);
+                                                }
+                                            });
                                         }, i * 100);
                                         if (i === result.length - 1) {
-                                            setTimeout(() => {
-                                                mazeSlide.buttonElement.classList.remove("hidden");
-                                            }, i * 105);
+                                            let startFound = false;
+                                            let startPoint = result[result.length - 1];
+                                            let j = i;
+
+                                            while(!startFound) {
+                                                if (startPoint.id === "start") {
+                                                    setTimeout(() => {
+                                                        let element = $(`#maze_container div[data-id="${startPoint.id}"]`);
+                                                        element.addClass('result');
+                                                        element.append(`<span class='exit entrance bottom'>`);
+                                                        mazeSlide.buttonElement.classList.remove("hidden");
+                                                    }, j * 101);
+                                                    break;
+                                                }
+
+                                                let id = startPoint.id;
+                                                setTimeout(() => {
+                                                    $(`#maze_container div[data-id="${id}"]`).addClass('result');
+                                                }, j * 100);
+
+                                                startPoint.data.node.neighbours.forEach((n) => {
+                                                    if ((result[0].data.node.position.x === n.position.x &&
+                                                        result[0].data.node.position.y === n.position.y) ||
+                                                        (startPoint.data.node.parent.data.node.position.x === n.position.x &&
+                                                        startPoint.data.node.parent.data.node.position.y === n.position.y)) {
+
+                                                        let baseX =  Math.abs(n.position.y - startPoint.data.node.position.y) / 2;
+                                                        let baseY = Math.abs(n.position.x - startPoint.data.node.position.x) / 2;
+                                                        if (baseX <= 0) baseX = 1;
+                                                        if (baseY <= 0) baseY = 1;
+
+                                                        setTimeout(() => {
+                                                            let dir = n.direction;
+                                                            let element = $(`#maze_container div[data-id="${id}"]`);
+
+                                                            if (dir === "top") {
+                                                                element
+                                                                    .append(`<span style='height: ${baseX * 33}px; top: calc(50% - ${baseX * 35}px);' class='result ${n.direction}'>`);
+                                                            } else if (dir === "bottom") {
+                                                                element
+                                                                    .append(`<span style='height: ${baseX * 33}px;' class='result ${n.direction}'>`);
+                                                            } else if (dir === "left") {
+                                                                element
+                                                                    .append(`<span style='width: ${baseY * 33}px; left: calc(50% - ${baseY * 33}px);' class='result ${n.direction}'>`);
+                                                            } else {
+                                                                element
+                                                                    .append(`<span style='width: ${baseY * 33}px;' class='result ${n.direction}'>`);
+                                                            }
+                                                        }, j * 100);
+                                                        j++;
+                                                    }
+                                                });
+
+                                                startPoint = startPoint.data.node.parent;
+                                            }
                                         }
                                     }
                                 });

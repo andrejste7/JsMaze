@@ -51,9 +51,11 @@ class Bfs extends AlgorithmBase {
 
             for (let i = 0; i < edges.length; i++) {
                 if (edges[i].source === this.selectedNode) {
+                    edges[i].target.data.node.parent = this.selectedNode;
                     this.queue.enqueue(edges[i].target);
                 }
                 if (edges[i].target === this.selectedNode) {
+                    edges[i].source.data.node.parent = this.selectedNode;
                     this.queue.enqueue(edges[i].source);
                 }
             }
@@ -75,6 +77,7 @@ class Bfs extends AlgorithmBase {
         let nodes = this.getNextNodes(nodeToSearch);
         if (nodes.length > 0) {
             for (let i = 0; i < nodes.length; i++) {
+                nodes[i].data.node.parent = nodeToSearch;
                 this.queue.enqueue(nodes[i]);
             }
         }
