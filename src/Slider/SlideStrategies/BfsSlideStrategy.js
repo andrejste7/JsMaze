@@ -86,6 +86,7 @@ class BfsSlideStrategy extends SlideStrategy {
                                 graph: maze.mazeToSpringyParser.arrayToSpringy(maze.mask),
                                 nodeSelected: function(node) {},
                             });
+                            window.onresize = undefined;
                             window.addEventListener('resize', () => {
                                 document.getElementById("cnv-graph").width = innerWidth;
                             })
