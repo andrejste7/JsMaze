@@ -20,32 +20,28 @@ class MazeNodeMaskBuilder {
         switch (node.direction) {
             case 'top':
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
-                    undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
                 )
                     node.position.y -= 1;
                 break;
 
             case 'right':
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
-                    undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
                 )
                     node.position.x += 1;
                 break;
 
             case 'bottom':
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
-                    undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
                 )
                     node.position.y += 1;
                 break;
 
             case 'left':
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
-                    undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
                 )
                     node.position.x -= 1;
                 break;
