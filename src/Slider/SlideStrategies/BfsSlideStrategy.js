@@ -99,7 +99,7 @@ class BfsSlideStrategy extends SlideStrategy {
                             for (let i = 0; i < result.length; i++) {
                                 setTimeout(() => {
                                     result[i].data.highlight = true;
-                                }, i * 100);
+                                }, i * 40);
                                 if (i === result.length - 1) {
                                     setTimeout(() => {
                                         graphSlide.buttonElement.classList.remove("hidden");
@@ -109,7 +109,7 @@ class BfsSlideStrategy extends SlideStrategy {
                                         // to use in the next steps
                                         maze.setSpringy(springy);
                                         maze.setResult(result);
-                                    }, i * 101);
+                                    }, i * 41);
                                 }
                             }
                         },
