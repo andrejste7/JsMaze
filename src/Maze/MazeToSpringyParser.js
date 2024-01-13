@@ -51,11 +51,31 @@ class MazeToSpringyParser {
                     {
                         color: '#f5d66f',
                         directional: true,
+                        distance: this.getDistance(node, neighbour),
                     },
                 ]);
             });
         });
 
         return springyGraph;
+    }
+
+    /**
+     * Receives two nodes
+     * calculates distance between them
+     * @param node
+     * @param node
+     * @returns {number}
+     */
+    getDistance(fromNode, toNode) {
+        if (toNode.direction === Directions.left || toNode.direction === Directions.right) {
+            return Math.abs(fromNode.position.x - toNode.position.x);
+        }
+
+        if (toNode.direction === Directions.top || toNode.direction === Directions.bottom) {
+            return Math.abs(fromNode.position.y - toNode.position.y);
+        }
+
+        return 0;
     }
 }

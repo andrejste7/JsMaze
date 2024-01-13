@@ -11,7 +11,7 @@ class Maze {
      * methods to create maze instances.
      * @type {?MazeBuilder}
      */
-    mazeInstance= null;
+    mazeInstance = null;
 
     /**
      * Creates a node mask for maze
@@ -19,7 +19,7 @@ class Maze {
      * in terms of optimization
      * @type {?MazeNodeMaskBuilder}
      */
-    mazeNodeMask= null;
+    mazeNodeMask = null;
 
     /**
      * Instance of a class that provides
@@ -27,13 +27,13 @@ class Maze {
      * into a Springy.js graph
      * @type {?MazeToSpringyParser}
      */
-    mazeToSpringyParser= null;
+    mazeToSpringyParser = null;
 
     /**
      * Algorithm for maze solving
      * @type {?AlgorithmBase}
      */
-    mazeSolvingAlgorithm = null
+    mazeSolvingAlgorithm = null;
 
     /**
      * Springy to share between graph
@@ -41,7 +41,7 @@ class Maze {
      * for optimization reasons
      * @type {?Springy}
      */
-    springy = null
+    springy = null;
 
     /**
      * Array of resulting
@@ -55,14 +55,13 @@ class Maze {
      * Create node mask layer on the maze
      * @type {[]}
      */
-    mask= [];
+    mask = [];
+
+    showDots = false;
 
     constructor(mazeSize, showDots = false) {
+        this.showDots = showDots;
         this.mazeSize = mazeSize;
-
-        if (showDots) {
-            this.mask.forEach(e => this.mazeInstance.maze[e.position.y][e.position.x] = 8);
-        }
     }
 
     initialize() {
@@ -86,6 +85,10 @@ class Maze {
     }
 
     async show(elementId) {
+        if (this.showDots) {
+            this.mask.forEach((e) => (this.mazeInstance.maze[e.position.y][e.position.x] = 8));
+        }
+
         this.mazeInstance.display(elementId);
     }
 }

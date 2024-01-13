@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>Maze solver</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="./favicon.ico">
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="./favicon.ico" />
 
         <!--  Libraries  -->
         <script src="lib/jquery.js" defer></script>
@@ -12,30 +12,31 @@
         <script src="lib/springyui.js" defer></script>
 
         <!--  Data-Structures  -->
-        <script src='src/DataStructures/Queue.js' defer></script>
+        <script src="src/DataStructures/Queue.js" defer></script>
 
         <!--  Algorithms  -->
-        <script src='src/Algorithms/AlgorithmBase.js' defer></script>
-        <script src='src/Algorithms/Bfs.js' defer></script>
-        <script src='src/Algorithms/Dfs.js' defer></script>
-        <script src='src/Algorithms/Dijkstra.js' defer></script>
+        <script src="src/Algorithms/AlgorithmBase.js" defer></script>
+        <script src="src/Algorithms/Bfs.js" defer></script>
+        <script src="src/Algorithms/Dfs.js" defer></script>
+        <script src="src/Algorithms/Dijkstra.js" defer></script>
 
         <!--  Menu  -->
-        <script src='src/Menu/MenuItem.js' defer></script>
-        <script src='src/Menu/Menu.js' defer></script>
-        <script src='src/Menu/MenuItemFactory.js' defer></script>
+        <script src="src/Menu/MenuItem.js" defer></script>
+        <script src="src/Menu/Menu.js" defer></script>
+        <script src="src/Menu/MenuItemFactory.js" defer></script>
 
         <!--  Maze  -->
-        <script src='src/Maze/MazeSettings.js' defer></script>
-        <script src='src/Maze/Maze.js' defer></script>
-        <script src='src/Maze/MazeBuilder.js' defer></script>
-        <script src='src/Maze/MazeNodeMaskBuilder.js' defer></script>
-        <script src='src/Maze/MazeToSpringyParser.js' defer></script>
+        <script src="src/Maze/MazeSettings.js" defer></script>
+        <script src="src/Maze/Maze.js" defer></script>
+        <script src="src/Maze/MazeBuilder.js" defer></script>
+        <script src="src/Maze/MazeNodeMaskBuilder.js" defer></script>
+        <script src="src/Maze/MazeToSpringyParser.js" defer></script>
+        <script src="src/Maze/enums/Directions.js" defer></script>
 
         <!--  Slider  -->
-        <script src='src/Slider/Slidable.js' defer></script>
-        <script src='src/Slider/Slide.js' defer></script>
-        <script src='src/Slider/Slider.js' defer></script>
+        <script src="src/Slider/Slidable.js" defer></script>
+        <script src="src/Slider/Slide.js" defer></script>
+        <script src="src/Slider/Slider.js" defer></script>
 
         <!--  Slides  -->
         <script src="src/Slider/Slides/SettingsSlide.js" defer></script>
@@ -58,86 +59,87 @@
 
         <!-- We love font-awesome -->
         <link
-            rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
             integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
     </head>
     <body>
-        <div id='maze_menu'>
+        <div id="maze_menu">
             <div>
-                <div><a href="#" id="dfs" data-algorithm="dfs" class='active'>DFS</a></div>
+                <div><a href="#" id="dfs" data-algorithm="dfs" class="active">DFS</a></div>
                 <div><a href="#" id="bfs" data-algorithm="bfs">BFS</a></div>
                 <div><a href="#" id="dijkstra" data-algorithm="dijkstra">DIJKSTRA</a></div>
             </div>
         </div>
 
-        <div id='maze_content'>
-            <div id="setup-slide" class='slide'>
-                <div id='settings'>
-                    <label for='size'>Ievadiet labirinta izmēru!</label>
-                    <div id='inputs'>
-                        <input type='number' id='size' value='10' autofocus>
+        <div id="maze_content">
+            <div id="setup-slide" class="slide">
+                <div id="settings">
+                    <label for="size">Ievadiet labirinta izmēru!</label>
+                    <div id="inputs">
+                        <input type="number" id="size" value="10" autofocus />
                         <i class="fas fa-times"></i>
-                        <p id='size-repeater'>10</p>
+                        <p id="size-repeater">10</p>
                     </div>
-                    <button type='button' id='make-maze-demo-btn' class='button'>Uzģenerēt</button>
+                    <button type="button" id="make-maze-demo-btn" class="button">Uzģenerēt</button>
                 </div>
             </div>
-            <div id="maze-preview-slide" class='slide'>
+            <div id="maze-preview-slide" class="slide">
                 <div id="maze_preview_container"><!-- --></div>
-                <button type='button' id='make-graph-btn' class='button'>Izveidot grafu</button>
+                <button type="button" id="make-graph-btn" class="button">Izveidot grafu</button>
             </div>
-            <div id="graph-slide" class='slide'>
-                <div id='graph_container'>
+            <div id="graph-slide" class="slide">
+                <div id="graph_container">
                     <div>
                         <canvas id="cnv-graph" width="1920px" height="500px"></canvas>
                     </div>
                     <div>
-                        <button type='button' id='make-maze-btn' class='button hidden'>Attēlot labirintu</button>
+                        <button type="button" id="make-maze-btn" class="button hidden">Attēlot labirintu</button>
                     </div>
                 </div>
             </div>
-            <div id="maze-slide" class='slide'>
+            <div id="maze-slide" class="slide">
                 <div id="maze_container"><!-- --></div>
-                <button type='button' id='repeat-btn' class='button hidden'>Tālāk..</button>
+                <button type="button" id="repeat-btn" class="button hidden">Tālāk..</button>
             </div>
-            <div id="repeat-slide" class='slide'>
+            <div id="repeat-slide" class="slide">
                 <div>
-                    <div id='results'><!-- --></div>
+                    <div id="results"><!-- --></div>
                     <div>
-                        <button type='button' id='reset-btn' class='button'>Uz sākumu</button>
+                        <button type="button" id="reset-btn" class="button">Uz sākumu</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id='progression'>
+        <div id="progression">
             <div class="progress-bar">
-                <div id='first-step' class="step">
+                <div id="first-step" class="step">
                     <p class="activatable">Sākums</p>
                     <div class="bullet activatable">
                         <span>1</span>
                     </div>
                     <div class="check fas fa-check activatable"></div>
                 </div>
-                <div id='second-step' class="step">
+                <div id="second-step" class="step">
                     <p class="activatable">Demo</p>
                     <div class="bullet activatable">
                         <span>2</span>
                     </div>
                     <div class="check fas fa-check activatable"></div>
                 </div>
-                <div id='third-step' class="step">
-                    <p class='activatable'>Grafs</p>
+                <div id="third-step" class="step">
+                    <p class="activatable">Grafs</p>
                     <div class="bullet activatable">
                         <span>3</span>
                     </div>
                     <div class="check fas fa-check activatable"></div>
                 </div>
-                <div id='fourth-step' class="step">
-                    <p class='activatable'>Labirints</p>
+                <div id="fourth-step" class="step">
+                    <p class="activatable">Labirints</p>
                     <div class="bullet activatable">
                         <span>4</span>
                     </div>

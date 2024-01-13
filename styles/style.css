@@ -338,6 +338,15 @@ body {
     left: calc(50% - 5px);
     top: calc(50% - 5px);
 }
+
+#maze div div.path-ds:after {
+   
+    background-color: #ffee00;
+}
+
+#maze div div.path:hover {
+    background-color: #ffffffc4;
+}
 #maze div div.path.result:after {
     background-color: #5dff54;
 }
@@ -433,6 +442,7 @@ body {
     gap: 40px;
 }
 #results {
+    text-align: center;
     font-size: 40px;
     color: #FFFFFF;
 }

@@ -18,30 +18,34 @@ class MazeNodeMaskBuilder {
      */
     getClosestNode(matrix, node) {
         switch (node.direction) {
-            case 'top':
+            case Directions.top:
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
+                    undefined
                 )
                     node.position.y -= 1;
                 break;
 
-            case 'right':
+            case Directions.right:
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
+                    undefined
                 )
                     node.position.x += 1;
                 break;
 
-            case 'bottom':
+            case Directions.bottom:
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
+                    undefined
                 )
                     node.position.y += 1;
                 break;
 
-            case 'left':
+            case Directions.left:
                 while (
-                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) === undefined
+                    matrix.find((e) => e.position.y === node.position.y && e.position.x === node.position.x) ===
+                    undefined
                 )
                     node.position.x -= 1;
                 break;
@@ -76,7 +80,7 @@ class MazeNodeMaskBuilder {
      * @returns {*[]}
      */
     removeRedundantFieldsFromMatrix(matrix) {
-        let nodeMask = [];
+        const nodeMask = [];
 
         // remove elements that are representing walls in maze and build path options
         for (let i = 0; i < matrix.length; i++) {
@@ -86,17 +90,17 @@ class MazeNodeMaskBuilder {
                 let neighbours = [];
 
                 if (i - 1 > 0 && !this.isObstacle(matrix[i - 1][j]))
-                    neighbours.push({ direction: 'top', position: { x: j, y: i - 1 } });
+                    neighbours.push({ direction: Directions.top, position: { x: j, y: i - 1 } });
                 if (j - 1 > 0 && !this.isObstacle(matrix[i][j - 1]))
-                    neighbours.push({ direction: 'left', position: { x: j - 1, y: i } });
+                    neighbours.push({ direction: Directions.left, position: { x: j - 1, y: i } });
                 if (j + 1 < matrix.length && !this.isObstacle(matrix[i][j + 1]))
-                    neighbours.push({ direction: 'right', position: { x: j + 1, y: i } });
+                    neighbours.push({ direction: Directions.right, position: { x: j + 1, y: i } });
                 if (i + 1 < matrix.length && !this.isObstacle(matrix[i + 1][j]))
-                    neighbours.push({ direction: 'bottom', position: { x: j, y: i + 1 } });
+                    neighbours.push({ direction: Directions.bottom, position: { x: j, y: i + 1 } });
 
                 if (neighbours.length <= 0) continue;
 
-                let pathOptions = { position: { x: j, y: i }, neighbours: neighbours };
+                const pathOptions = { position: { x: j, y: i }, neighbours: neighbours };
 
                 nodeMask.push(pathOptions);
             }
@@ -107,8 +111,8 @@ class MazeNodeMaskBuilder {
             if (
                 nodeMask[i]?.neighbours?.length &&
                 nodeMask[i].neighbours.length === 2 &&
-                nodeMask[i].neighbours.filter((e) => e.direction === 'left').length === 1 &&
-                nodeMask[i].neighbours.filter((e) => e.direction === 'right').length === 1
+                nodeMask[i].neighbours.filter((e) => e.direction === Directions.left).length === 1 &&
+                nodeMask[i].neighbours.filter((e) => e.direction === Directions.right).length === 1
             ) {
                 nodeMask[i] = 'x';
             }
@@ -116,8 +120,8 @@ class MazeNodeMaskBuilder {
             if (
                 nodeMask[i]?.neighbours?.length &&
                 nodeMask[i].neighbours.length === 2 &&
-                nodeMask[i].neighbours.filter((e) => e.direction === 'top').length === 1 &&
-                nodeMask[i].neighbours.filter((e) => e.direction === 'bottom').length === 1
+                nodeMask[i].neighbours.filter((e) => e.direction === Directions.top).length === 1 &&
+                nodeMask[i].neighbours.filter((e) => e.direction === Directions.bottom).length === 1
             ) {
                 nodeMask[i] = 'x';
             }
